@@ -40,27 +40,29 @@ export class UsersService {
     password: string,
     token: string,
   ) {
-    token = bcrypt.hashSync(password, 256);
-    jwt.sign(
-      { username: username, email: email, password: password },
-      'secretpasswordkey',
-    );
-    const newUser = new this.UserModel({
-      username,
-      email,
-      password: token,
-      token,
-    });
-    newUser.save();
-    console.log(username, email, password, token);
-    return 'Good';
+    const user = await this.UserModel.findOne({ email });
+    if (user) {
+      return 'This user already exists';
+    } else {
+      token = bcrypt.hashSync(password, 10);
+      jwt.sign(
+        { username: username, email: email, password: password },
+        'secretpasswordkey',
+      );
+      const newUser = new this.UserModel({
+        username,
+        email,
+        password: token,
+        token,
+      });
+      newUser.save();
+      return 'Good';
+    }
   }
 
   async logUser(email: string, password: string) {
-    console.log(password);
-    const user = await this.UserModel.findOne({ email: email });
+    const user = await this.UserModel.findOne({ email });
     const match = bcrypt.compareSync(password, user.password);
-
     if (match) {
       return {
         token: user.token,

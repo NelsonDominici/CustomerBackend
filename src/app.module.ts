@@ -9,9 +9,6 @@ import { UsersModule } from './users/users.module';
   imports: [
     MongooseModule.forRoot(
       'mongodb+srv://customeruser:customeruser@cluster0.zuexs.mongodb.net/?retryWrites=true&w=majority',
-      {
-        useNewUrlParser: true,
-      },
     ),
     CustomerModule,
     UsersModule,

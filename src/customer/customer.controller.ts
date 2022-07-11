@@ -28,14 +28,14 @@ export class CustomerController {
     });
   }
 
-  // Retrieve customers list
+  // Retrieve customers
   @Get('customers')
   async getAllCustomer(@Res() res) {
     const customers = await this.customerService.getAllCustomer();
     return res.status(HttpStatus.OK).json(customers);
   }
 
-  // Fetch a particular customer using ID
+  // Get a particular customer using ID
   @Get('customer/:customerID')
   async getCustomer(@Res() res, @Param('customerID') customerID) {
     const customer = await this.customerService.getCustomer(customerID);
@@ -43,7 +43,7 @@ export class CustomerController {
     return res.status(HttpStatus.OK).json(customer);
   }
 
-  // Update a customer's details
+  // Update customer's data
   @Put('/update')
   async updateCustomer(
     @Res() res,

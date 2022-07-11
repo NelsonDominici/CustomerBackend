@@ -9,34 +9,32 @@ export class CustomerService {
   constructor(
     @InjectModel('Customer') private readonly customerModel: Model<Customer>,
   ) {}
-  // fetch all customers
+  // all customers
   async getAllCustomer(): Promise<Customer[]> {
     const customers = await this.customerModel.find().exec();
     return customers;
   }
-  // Get a single customer
+  // Get 1 customer
   async getCustomer(customerID): Promise<Customer> {
     const customer = await this.customerModel.findById(customerID).exec();
     return customer;
   }
-  // post a single customer
+  // post 1 customer
   async addCustomer(createCustomerDTO: CreateCustomerDTO): Promise<Customer> {
     const newCustomer = await new this.customerModel(createCustomerDTO);
-    console.log(createCustomerDTO);
+    //console.log(createCustomerDTO);
     return newCustomer.save();
   }
-  // Edit customer details
+  // Edit customer's data
   async updateCustomer(
     customerID,
     createCustomerDTO: CreateCustomerDTO,
-    //Promise<Customer> toma el customer como parametro
   ): Promise<Customer> {
     const updatedCustomer = await this.customerModel.findByIdAndUpdate(
       customerID,
       createCustomerDTO,
-      { new: true },
     );
-    console.log(customerID);
+    //console.log(customerID);
     return updatedCustomer;
   }
   // Delete a customer
@@ -44,7 +42,7 @@ export class CustomerService {
     const deletedCustomer = await this.customerModel.findByIdAndRemove(
       customerID,
     );
-    console.log(customerID);
+    //console.log(customerID);
     return deletedCustomer;
   }
 }

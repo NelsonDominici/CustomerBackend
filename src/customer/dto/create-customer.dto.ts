@@ -6,5 +6,4 @@ export class CreateCustomerDTO {
   readonly address: string;
   readonly description: string;
   readonly created_at: Date;
-  //readonly token: string;
 }
