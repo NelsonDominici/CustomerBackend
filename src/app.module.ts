@@ -8,7 +8,7 @@ import { UsersModule } from './users/users.module';
 @Module({
   imports: [
     MongooseModule.forRoot(
-      'mongodb+srv://customeruser:customeruser@cluster0.zuexs.mongodb.net/?retryWrites=true&w=majority',
+      'mongodb+srv://customeruser:customeruser@customer.ijsetmo.mongodb.net/?retryWrites=true&w=majority',
     ),
     CustomerModule,
     UsersModule,
